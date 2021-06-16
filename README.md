@@ -1,1 +1,1 @@
-# SeismicUnix
+I programmed a long time for Schlumberger (Western Geophysical). Initially stand-alone seismic data processing programs in Fortran77 and then Omega modules in C++. Then 1.5 years porting some modules into Shearwater's Reveal (for Exxon).  
