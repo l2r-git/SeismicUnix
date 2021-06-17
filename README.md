@@ -16,10 +16,11 @@ Several other SU keys will be updated to contain usefull 3D Grid related values.
 Other usefull computations will occur and be updated (source-to-receiver OFFSET). 
 Further, a "nominal" 2D CDP computation option will be allowed for 2D survey situations.
 
-----
-The ability to use CSV files for geometry leads in the direction of using SpreadSheets or mySQL as databases to by-pass the 240 byte header limitations of SU.
-But that is an extensive concept, and somewhat further in the future.
-----
+The ability to use CSV files for geometry leads in the direction of using SpreadSheets or SQL databases to by-pass the 240 byte header limitations of SU.
+Basically you just have to make sure the X, S, and R records of SPS2 format have unique mapping values for their equivalent SpreadSheet/SQL tables produced 
+from the CSV files output by SUTOOLCSV - and make sure SUGEOMCSV updates those unique mapping values to known SU trace keys. Which fits easily within 240 bytes.
+The mapped SpreadSheet/SQL tables then essentially become external headers to contain information that cannot fit in 240 bytes and also allow processing of
+that information without reading the associated SU seismic file.      But this is an extensive concept, and somewhat further in the future.
 
 Also included herein will be examples of the 3 SPS2 fixed-format files. And examples of how to run SUTOOLCSV and SUGEOMCSV.
 These examples will also include problems/issues with the SPS2 files, and possible solutions.
