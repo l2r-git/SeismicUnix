@@ -1,0 +1,53 @@
+
+Yes, I could automate all examples if the idea here was to test my code, but it isn't.  
+The idea is to show novice users how to proceed. 
+
+First test:
+
+  sutoolcsv rfile=l2xall.txt setid=x match=sps2 forms=sps2 names=sps2all wfile=l2xall2.csv
+
+Now look at the output l2xall2.csv in a simple text editor (like "vi"). 
+
+Now run:
+
+  sutoolcsv rfile=l2xall2.csv wfile=l2xall2.txt
+
+This converts the csv back to fixed format. Look at the output l2xall2.txt file.
+
+And/or Run:
+
+  diff l2xall2.txt l2xall.txt
+
+Notice that the data records are identical.  
+
+Now go back to the l2xall2.csv file and put a 3 where the second 0 is located:
+        that is, change     C_SU_ID,%.0f,%.0f... to  C_SU_ID,%.0f,%.3f...
+
+
+Rerun:
+
+  sutoolcsv rfile=l2xall2.csv wfile=l2xall2.txt
+
+Note that the top "7" value has become "7.000" (and so on for that "column" of numbers). 
+
+
+Next, change the 18_grnofr_27 to 18_grnofr_25 in the l2xall2.csv file.
+
+Rerun:
+
+  sutoolcsv rfile=l2xall2.csv wfile=l2xall2.txt
+
+Note that the "100.00" on first data record has moved 2 spaces to the left (and so on for that "column" of numbers).
+
+----
+
+You can run the same kinds of tests for the SPS2 S and R files:
+
+  sutoolcsv rfile=l2sall.txt setid=s match=sps2 forms=sps2 names=sps2all wfile=l2sall2.csv
+  sutoolcsv rfile=l2sall2.csv wfile=l2sall2.txt
+  diff l2sall2.txt l2sall.txt
+  
+  sutoolcsv rfile=l2rall.txt setid=r match=sps2 forms=sps2 names=sps2all wfile=l2rall2.csv
+  sutoolcsv rfile=l2rall2.csv wfile=l2rall2.txt
+  diff l2rall2.txt l2rall.txt
+  
