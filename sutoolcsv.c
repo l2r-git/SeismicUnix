@@ -2787,7 +2787,7 @@ int main(int argc, char **argv) {
                  if(l7verr<4) {
                    int j = (int) (RecInfo[m].lfield[0]/dtol + 0.5);
                    warn("Error: The grnofr values are different for same shot at %s= %d ",match[0],j);
-                   if(l1verr==3) {
+                   if(l7verr==3) {
                      warn("Have 3 grnofr-values-are-different-for-same-shot, no more will be printed.");
                    }
                  }
@@ -2806,7 +2806,7 @@ int main(int argc, char **argv) {
                  if(l8verr<4) {
                    int j = (int) (RecInfo[m].lfield[0]/dtol + 0.5);
                    warn("Error: The grnlof values are different for same shot at %s= %d ",match[0],j);
-                   if(l1verr==3) {
+                   if(l8verr==3) {
                      warn("Have 3 grnlof-values-are-different-for-same-shot, no more will be printed.");
                    }
                  }
