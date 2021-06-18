@@ -745,7 +745,7 @@ int main(int argc, char **argv) {
    double *valmx = NULL;
    int *kcase = NULL;
    int *ktol = NULL;
-   int mapx[6];
+   int mapx[10];
    cwp_String *pross = NULL;   
    int *plead = NULL;
    int *ptrail = NULL;
@@ -2043,7 +2043,7 @@ int main(int argc, char **argv) {
   
 /* Find the name with _cf _ct _ci and the name with _rf _rt appendices. */
 
-   for(int i=0; i<6; i++) mapx[i] = -1;
+   for(int i=0; i<10; i++) mapx[i] = -1;
 
    int kerr = 0;
 
@@ -2090,6 +2090,12 @@ int main(int argc, char **argv) {
          }
          mapx[4] = i;
          ncase[i] = 0; /* Set to NOT update the output header with this */
+       }
+       else if(strcmp(names[i],"grnofr") == 0) { /* note names not namex */ 
+         mapx[7] = i; /* if user does not use my standard name, gets no warning */
+       }
+       else if(strcmp(names[i],"grnlof") == 0) { /* note names not namex */
+         mapx[8] = i; /* if user does not use my standard name, gets no warning */
        }
 
      }
@@ -2692,12 +2698,18 @@ int main(int argc, char **argv) {
      int l4verr = 0;
      int l5verr = 0;
      int l6verr = 0;
+     int l7verr = 0;
+     int l8verr = 0;
      int l1same = 0;
      int l2same = 0;
      int l3same = 0;
      int l4same = 0;
      int l5same = 0;
      int l6same = 0;
+     int l7same = 0;
+     int l8same = 0;
+     long long int ntop_grnofr = 0;  
+     long long int ntop_grnlof = 0;  
 
      num_of_others = num_to_sort_by - 1; /* compOther uses num_of_others internally  */ 
 
@@ -2724,6 +2736,8 @@ int main(int argc, char **argv) {
          l4same = 0;
          l5same = 0;
          l6same = 0;
+         l7same = 0;
+         l8same = 0;
 
          int nchan = 0;
          int nsegs = 0;
@@ -2761,6 +2775,44 @@ int main(int argc, char **argv) {
                }
              }
            }
+
+           if(mapx[7]>-1) {
+             if(m==ntop) {
+               ntop_grnofr = longt(RecInfo[m].dfield[mapx[7]],dtolh,dtol);  
+             }
+             else {
+               if(l7same==0 && ntop_grnofr != longt(RecInfo[m].dfield[mapx[7]],dtolh,dtol)) {
+                 l7same = 1;
+                 l7verr = l7verr + 1;
+                 if(l7verr<4) {
+                   int j = (int) (RecInfo[m].lfield[0]/dtol + 0.5);
+                   warn("Error: The grnofr values are different for same shot at %s= %d ",match[0],j);
+                   if(l1verr==3) {
+                     warn("Have 3 grnofr-values-are-different-for-same-shot, no more will be printed.");
+                   }
+                 }
+               }
+             }
+           } 
+
+           if(mapx[8]>-1) {
+             if(m==ntop) {
+               ntop_grnlof = longt(RecInfo[m].dfield[mapx[8]],dtolh,dtol);  
+             } 
+             else {
+               if(l8same==0 && ntop_grnlof != longt(RecInfo[m].dfield[mapx[8]],dtolh,dtol)) { 
+                 l8same = 1;
+                 l8verr = l8verr + 1;
+                 if(l8verr<4) {
+                   int j = (int) (RecInfo[m].lfield[0]/dtol + 0.5);
+                   warn("Error: The grnlof values are different for same shot at %s= %d ",match[0],j);
+                   if(l1verr==3) {
+                     warn("Have 3 grnlof-values-are-different-for-same-shot, no more will be printed.");
+                   }
+                 }
+               }
+             }
+           } 
 
            for(int i=m+1; i<n-1; i++) {
              long long int icf = longt(RecInfo[i].dfield[mapx[0]],dtolh,dtol);
@@ -2847,6 +2899,8 @@ int main(int argc, char **argv) {
      if(l4verr>0) warn("Total Number-of-channels-in-layout-changed:         %d (unusual)",l4verr);
      if(l5verr>0) warn("Total Receiver-points-per-channel changed:          %d (very unusual)",l5verr);
      if(l6verr>0) warn("Total Number-of-segments-in-layout-changed:         %d (unusual)",l6verr);
+     if(l7verr>0) warn("Total grnofr-values-are-different-for-same-shot:    %d (will error-halt SUGEOMCSV)",l7verr);
+     if(l8verr>0) warn("Total grnlof-values-are-different-for-same-shot:    %d (will error-halt SUGEOMCSV)",l8verr);
    } /* end of  if(mapx[3] > -1) { */ 
 
    else {
