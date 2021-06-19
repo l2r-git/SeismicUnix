@@ -1,0 +1,21 @@
+
+To get an idea of what the unrepeat option does,
+
+Run:
+
+  sutoolcsv rfile=l2xallFLDR_RESET.txt setid=x match=sps2 forms=sps2 names=sps2all wfile=l2xallF2.txt
+
+Note that the fldr values in l2xallFLDR_RESET.txt are 7,8,9,7,8,9,10, and 11 
+which means the field people chose to re-start fldr numbering at 7. 
+This kind of thing often happens (but usually after many more records).  
+
+Within sutoolcsv and sugeomcsv, all records for each fldr are considered a set, regardless of their order.
+Which means fldr 7 appears to have 8 segments with overlapping channel ranges, so you get the same kinds 
+of errors/warnings as in sutoolcsp_errors.txt 
+
+Run:
+
+  sutoolcsv rfile=l2xallFLDR_RESET.txt setid=x match=sps2 forms=sps2 names=sps2all wfile=l2xallF2.txt unrepeat=1
+
+The unrepeat option can often solve this issue. But it is not foolproof. Sometimes you will simply have to
+edit the SPS2 X-file and the seismic file into separate (unique fldr) pieces before running sugeomcsv.

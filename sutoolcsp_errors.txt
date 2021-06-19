@@ -1,0 +1,16 @@
+
+To get an idea of the kind of error/warning messages you will see.
+
+Run:
+
+  sutoolcsv rfile=l2xallERRORS.txt setid=x match=sps2 forms=sps2 names=sps2all wfile=l2xallERRORS2.txt
+
+
+Note that fldr 9 has 4 segments specifying channels 1-12 11-22 25-36 37-48.
+This means channels 11 and 12 are defined to exist twice in the layout for fldr 9.
+
+Similarly, fldr 10 has 4 segments specifying channels 1-12 13-24 22-34 37-48.
+This means channels 22 and 23 are defined to exist twice in the layout for fldr 10.
+
+
+This will cause error messages, and also some related warning messages.
