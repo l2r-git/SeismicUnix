@@ -2429,7 +2429,10 @@ int main(int argc, char **argv) {
      if(ifound>0) { 
 
        if(iscalel!=0) tr.scalel = iscalel;
-       if(iscalco!=0) tr.scalco = iscalco;
+       if(iscalco!=0) {
+         tr.scalco = iscalco;
+         tr.counit = 1;
+       }
 
 /* Get the names= values and update the output header.   */
 
