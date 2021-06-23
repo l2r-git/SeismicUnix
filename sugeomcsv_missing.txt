@@ -1,0 +1,25 @@
+ 
+To test missing Receiver, run:
+
+  sugeomcsv rfile=l2xall.txt setid=x match=sps2 forms=sps2 names=sps2 >fakex.su create=100 
+
+  sugeomcsv rfile=l2sall.txt setid=s match=sps2 forms=sps2 names=sps2 <fakex.su >fakexs.su
+
+  sugeomcsv rfile=l2rmissing.txt setid=r match=sps2 forms=sps2 names=sps2 <fakexs.su >fakexsr.su
+
+Then:
+
+  sugeomcsv rfile=l2rmissing.txt setid=r match=sps2 forms=sps2 names=sps2 <fakexs.su >fakexsr.su missing=pass
+
+  sugethw <fakexsr.su key=sx,sy,gx,gy,fldr,tracf,offset
+
+
+Notice that gx,gy have 0 value several places. And offset is very large.
+
+If the Receivers are known to be missing and the corresponding traces are not needed, use missing=delete.
+  
+
+Similar issues can occur for S-files.
+
+And also X-files (when actual data is input, not create=). 
+In that case you might have fldr's for test seismic records that are not in the X-file. 

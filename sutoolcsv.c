@@ -2941,7 +2941,7 @@ int main(int argc, char **argv) {
        } /* end of  if(compSort(RecInfo+n,RecInfo+n-1) == 0) { */
      }
 
-     if(l7verr>0) warn("Total  errors  for Records-have-duplicate-match-values:          %d",l7verr);
+     if(l7verr>0) warn("Total  errors  for Records-have-duplicate-match-values: %d (will error-halt SUGEOMCSV)",l7verr);
 
      if(num_to_sort_by==1 || num_to_sort_by==2) { 
        int jn = 0;

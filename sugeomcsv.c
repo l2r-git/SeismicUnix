@@ -393,6 +393,8 @@ char *sdoc[] = {
 "              set to -10 (meaning these values need to be divided by 10). ",
 "          *** You cannot specify scalco= if you are not updating any      ",
 "          *** of the 4 coordinate values.                                 ",
+"         **** The SU key offset value is recomputed if any of sx,sy,gx,gy ",
+"         **** is in the list of names (and offset itself is NOT in list). ",
 "            * If you are confident your text files contain coordinates    ",
 "            * with only whole numbers, you can set this to 1. But you     ",
 "            * cannot change this just for some of these 4 coordinates.    ",
@@ -400,10 +402,14 @@ char *sdoc[] = {
 "           ** problem about decimal digits. It you use 1 here you will    ",
 "           ** find that values like 544444.6 get rounded to 544445        ",
 "           ** when SUGEOMCSV updates them to traces.                      ",
+"          *** If scalco is in the list of names= then that value is set   ",
+"              in output header. But only the value specified or defaulted ",
+"              HERE is actually applied. So do not put it in names= unless ",
+"              you are repairing some odd situation.                       ",
 "                                                                          ", 
 "      scalel= multiply elevation and other related values by this power   ",
 "              of 10 (1,10,100...) before putting them in traces. Default  ",
-"              is 10 which means gelev,selev,sdepth,gdel,sdel,swdep,gwdep   ",
+"              is 10 which means gelev,selev,sdepth,gdel,sdel,swdep,gwdep  ",
 "              from the text file are multiplied by 10.                    ",
 "              The actual value of scalel in the traces is therefore       ",
 "              set to -10 (meaning these values need to be divided by 10). ",
@@ -416,6 +422,10 @@ char *sdoc[] = {
 "           ** problem about decimal digits. It you use 1 here you will    ",
 "           ** find that values like 3333.6 get rounded to 3334            ",
 "           ** when SUGEOMCSV updates them to traces.                      ",
+"          *** If scalel is in the list of names= then that value is set   ",
+"              in output header. But only the value specified or defaulted ",
+"              HERE is actually applied. So do not put it in names= unless ",
+"              you are repairing some odd situation.                       ",
 "                                                                          ", 
 "     unrepeat= The default is not to enable this option.                  ", 
 "               This option is general but most likely usefull for X-files ", 
@@ -1538,6 +1548,7 @@ int main(int argc, char **argv) {
 
    int jscalel = 0;
    int jscalco = 0;
+   int joffset = 0;
    int numcases = 0;
    for(int i=0; i<num_names;i++) { 
      int iamcase = GetCase(names[i]);
@@ -1572,6 +1583,8 @@ int main(int argc, char **argv) {
          valmx[numcases] /= dscalco;
          jscalco = 1;
        }
+       if(strcmp(names[i],"offset") == 0) joffset = 1; 
+
        numcases++; 
      }
    }
@@ -1583,6 +1596,12 @@ int main(int argc, char **argv) {
      if(iscalcodef==1) iscalco = 0;      /* defaulted scalco so do not set it */
      else err("**** Error: Cannot specify scalco= if not updating any of the 4 coordinate values.");
    }
+
+/* if offset not in names list, recompute if some XY updating */
+/* (but accept manual offset value, do not assume user wrong) */
+
+   int ioffset = 0;
+   if(joffset==0 && jscalco==1) ioffset = 1; 
   
 /* Find the name with _cf _ct _ci and the name with _rf _rt appendices. */
 
@@ -2195,7 +2214,7 @@ int main(int argc, char **argv) {
        } /* end of  if(compSort(RecInfo+n,RecInfo+n-1) == 0) { */
      }
 
-     if(l7verr>0) warn("Total  errors  for Records-have-duplicate-match-values:          %d",l7verr);
+     if(l7verr>0) err("Total  errors  for Records-have-duplicate-match-values: %d",l7verr);
 
      if(num_to_sort_by==1 || num_to_sort_by==2) { 
        int jn = 0;
@@ -2465,18 +2484,16 @@ int main(int argc, char **argv) {
 
         } /* end of   for(int n=0,n<numcases,n++) {  */ 
 
-
-/* andre */
-       tr.offset = sqrt((tr.sx-tr.gx)*(tr.sx-tr.gx)/100. + (tr.sy-tr.gy)*(tr.sy-tr.gy)/100.);
-
-
+        if(ioffset!=0) {
+          tr.offset = sqrt((tr.sx-tr.gx)/dscalco*(tr.sx-tr.gx)/dscalco + (tr.sy-tr.gy)/dscalco*(tr.sy-tr.gy)/dscalco);
+        }
         
       } /* end of  if(ifound>0) { */
 
       if(ifound<0) {
         notfound++;
         if(missing==-1) {
-          err(" Error: Could not find match= text record for trace and missing= is error-halt.");
+          err(" Error: Could not find a match= text record for trace and missing= option is error-halt.");
         }
       }
 
@@ -2503,10 +2520,10 @@ int main(int argc, char **argv) {
    warn("Number of traces output: %d ",nproct);
    if(notfound>0) {
      if(missing==0) {
-       warn("Traces not output due to no match= in text file: %d ",notfound);
+       warn("Traces not output due to no match= in text file: %d (your missing= option)",notfound);
      }
      else {
-       warn("Traces output due to no match= in text file: %d ",notfound);
+       warn("Traces output anyway despite no match= in text file: %d (your missing= option)",notfound);
      }
    }
 
