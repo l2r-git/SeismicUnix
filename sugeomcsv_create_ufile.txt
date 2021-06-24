@@ -1,0 +1,7 @@
+To check/test/understand the ufile= option, look at l2xallBARE.txt and l2xallTOP.txt
+
+And then run: 
+
+  sugeomcsv rfile=l2xallBARE.txt ufile=l2xallTOP.txt >fakex.su create=100 spikes=4,0.01,200,1000,208,1200,500,-2000,800,1600,1000,0
+
+and then continue as in sugeomcsv_create_realistic.txt if you want....
