@@ -6,9 +6,7 @@ Run:
   sutoolcsv rfile=l1xPROCESS.txt setid=x match=sps1 forms=sps1 names=sps1all wfile=l1xP.txt
 
 Note several field-unreadable errors/warnings occur.
-
 Look at the input l1xPROCESS.txt file card-columns. You can see that it is SPS1 format. 
-
 A basic problem with SPS1 files is that the shot lines and receiver lines often contain characters.
 
 Now run:
@@ -27,7 +25,7 @@ Now run:
             process=14_trimz_29,48_trimz_63
 
 The R-500100 has been replaced with -500100 but now there are other error/warnings that -500100 
-is too large to fit in the SU name. The SU name for this field is grnors (set by names1=sps1 option).
+is too large to fit in the SU name. The SU name for this field is grnors (set by names=sps1 option).
 The grnors SU key is a 2-byte integer which means only magnitudes less than 32765 can fit.  
 
 So run:
@@ -39,7 +37,7 @@ Now look at the output l1xP.txt file and see that R-500100 has now been reduced 
 
 ----
 
-Is this kind of processing OK? Genereally yes. Remember that SUGEOMCSV is updating all these
+Is this kind of processing OK? Generally yes. Remember that SUGEOMCSV is updating all these
 values into the SU trace headers. So it "does not matter" what the original field numbering is.
 But you should try to retain as much of the original numbering as possible so that you can 
 still identify which field lines your new numbers refer to.
@@ -56,5 +54,7 @@ But you can also just convert the input file to csv and then read that csv file 
 (libreOffice Calc or whatever) and change the values. As long as you do not mangle the C_SU records
 at the top, you can then convert back to txt if you want.
 
-Note: SUGEOMCSV does not have the process= options. That is deliberate. 
-      You need to look at the changed files.
+*****
+
+Note: SUGEOMCSV does not have process= options. That is deliberate. 
+      You need to review the process= effects and input the changed files to SUGEOMCSV.
