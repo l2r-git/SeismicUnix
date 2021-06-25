@@ -1,0 +1,41 @@
+ 
+Create some traces and test statics add/subract and different delimiter:
+
+  sugeomcsv rfile=l2xall.txt setid=x match=sps2 forms=sps2 names=sps2 >fakex.su create=100 spikes=4,0.01,200,1000,208,1200,500,-2000,800,1600,1000,0
+
+  sugeomcsv rfile=l2sall.txt setid=s match=sps2 forms=sps2 names=sps2 <fakex.su >fakexs.su
+
+  sugeomcsv rfile=l2rall.txt setid=r match=sps2 forms=sps2 names=sps2 <fakexs.su >fakexsr.su
+  
+  subfilt <fakexsr.su >fakexsrf.su fpasshi=20
+
+  sunmo <fakexsrf.su >fakexsrfn.su invert=1 tnmo=0,190,450,800 vnmo=1800,3500,4000,5000
+
+--------
+
+Replace statics for some receivers:
+
+  sugeomcsv rfile=l2rSTATICS.csv missing=pass <fakexsrfn.su >fakexsrfns.su
+   
+  sugethw <fakexsrfns.su key=gstat,grnors,gaps
+
+--------
+
+Add those statics again:
+
+  sugeomcsv rfile=l2rSTATICS.csv missing=pass action=add <fakexsrfns.su >fakexsrfns2.su
+
+  sugethw <fakexsrfns2.su key=gstat,grnors,gaps
+
+--------
+
+Subtract statics for some receivers, using semi-colon delimiter:
+
+  sugeomcsv rfile=l2rSTATICSsemi.csv rdelim=";" missing=pass action=subtract <fakexsrfns.su >fakexsrfnss.su
+
+  sugethw <fakexsrfnss.su key=gstat,grnors,gaps
+
+
+*** Note that you must double-quote rdelim because semi-colon makes trouble on the command line.
+
+

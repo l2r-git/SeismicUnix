@@ -2478,7 +2478,7 @@ int main(int argc, char **argv) {
          if(ncase[n]>12 && ncase[n]<20) dvalue *= dscalel;
          if(ncase[n]>21 && ncase[n]<26) dvalue *= dscalco;
 
-         if(iaction!=0) dvalue += iaction * fromhead(tr, ncase[n]);
+         if(iaction!=0) dvalue = iaction * dvalue + fromhead(tr, ncase[n]);
 
          tohead(&tr, ncase[n], dvalue);
 
