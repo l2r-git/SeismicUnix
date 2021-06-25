@@ -26,17 +26,16 @@ Also included herein are examples of the 3 SPS2 fixed-format files. And examples
 These examples also include problems/issues with the SPS2 files, and possible solutions.
 
 I suggest you review, and run, the examples/tests in the following order:
-  
- sutoolcsp_example1.txt
- sutoolcsp_errors.txt
- sutoolcsp_unrepeat.txt
- sutoolcsp_sps2_sps1.txt
- sutoolcsp_process.txt
 
- sugeomcsv_create_realistic.txt
- sugeomcsv_nicerecord.txt
- sugeomcsv_missing.txt
- sugeomcsv_scalco_scalel.txt
- sugeomcsv_create_ufile.txt
- sugeomcsv_statics_and_delim.txt
+sutoolcsp_example1.txt
+sutoolcsp_errors.txt
+sutoolcsp_unrepeat.txt
+sutoolcsp_sps2_sps1.txt
+sutoolcsp_process.txt
 
+sugeomcsv_create_realistic.txt
+sugeomcsv_nicerecord.txt
+sugeomcsv_missing.txt
+sugeomcsv_scalco_scalel.txt
+sugeomcsv_create_ufile.txt
+sugeomcsv_statics_and_delim.txt
