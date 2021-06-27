@@ -1,4 +1,6 @@
-The general idea is to add land and ocean-bottom-cable 3D GEOMETRY handling functionality into Seismic Unix (SU).
+The programs herein are equally usefull and useable for 3D and 2D geometry loading. And also for handling values such as statics. 
+
+But most examples herein concentrate on using them for loading initial 3D land/ocean-bottom-cable geometry using a full set of SPS2 files.
 
 This starts with SUTOOLCSV which can input fixed-format text files and parse them into comma-separated-values (CSV) files - with assigned SU key names.
 As it parses the files, SUTOOLCSV also examines them and reports errors/issues/problems with the values in the input text files.
@@ -28,14 +30,25 @@ These examples also include problems/issues with the SPS2 files, and possible so
 I suggest you review, and run, the examples/tests in the following order:
 
 sutoolcsp_example1.txt
+
 sutoolcsp_errors.txt
+
 sutoolcsp_unrepeat.txt
+
 sutoolcsp_sps2_sps1.txt
+
 sutoolcsp_process.txt
 
+
 sugeomcsv_create_realistic.txt
+
 sugeomcsv_nicerecord.txt
+
 sugeomcsv_missing.txt
+
 sugeomcsv_scalco_scalel.txt
+
 sugeomcsv_create_ufile.txt
+
 sugeomcsv_statics_and_delim.txt
+
