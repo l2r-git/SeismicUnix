@@ -1,4 +1,6 @@
-The general idea is to add land and ocean-bottom-cable 3D GEOMETRY handling functionality into Seismic Unix (SU).
+The programs herein are equally usefull and useable for 3D and 2D geometry loading. And also for handling values such as statics. 
+
+But most examples herein concentrate on using them for loading initial 3D land/ocean-bottom-cable geometry using a full set of SPS2 files.
 
 This starts with SUTOOLCSV which can input fixed-format text files and parse them into comma-separated-values (CSV) files - with assigned SU key names.
 As it parses the files, SUTOOLCSV also examines them and reports errors/issues/problems with the values in the input text files.
@@ -22,6 +24,31 @@ from the CSV files output by SUTOOLCSV - and make sure SUGEOMCSV updates those u
 The mapped SpreadSheet/SQL tables then essentially become external headers to contain information that cannot fit in 240 bytes and also allow processing of
 that information without reading the associated SU seismic file.      But this is an extensive concept, and somewhat further in the future.
 
-Also included herein will be examples of the 3 SPS2 fixed-format files. And examples of how to run SUTOOLCSV and SUGEOMCSV.
-These examples will also include problems/issues with the SPS2 files, and possible solutions.
+Also included herein are examples of the 3 SPS2 fixed-format files. And examples of how to run SUTOOLCSV and SUGEOMCSV.
+These examples also include problems/issues with the SPS2 files, and possible solutions.
+
+I suggest you review, and run, the examples/tests in the following order:
+
+sutoolcsp_example1.txt
+
+sutoolcsp_errors.txt
+
+sutoolcsp_unrepeat.txt
+
+sutoolcsp_sps2_sps1.txt
+
+sutoolcsp_process.txt
+
+
+sugeomcsv_create_realistic.txt
+
+sugeomcsv_nicerecord.txt
+
+sugeomcsv_missing.txt
+
+sugeomcsv_scalco_scalel.txt
+
+sugeomcsv_create_ufile.txt
+
+sugeomcsv_statics_and_delim.txt
 
