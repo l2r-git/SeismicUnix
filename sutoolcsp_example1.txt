@@ -1,3 +1,19 @@
+To get a quick idea of what is going on here, first view:
+
+  shots.png 
+  receiver.png
+
+One thing to note is that the shot lines and receiver lines are at right-angles. 
+This is quite typical for 3D (for 2D the shot line is the same as the receiver line).
+Another confusion is that points may be named "stations" in some documents. 
+
+Next: view file shotshot.svg which contains an image of the top part of an SPS2 S-file and also 
+the top part of the corresponding csv file after conversion to csv by SUTOOLCSV and then importing
+that csv file to libreOffice Calc. In the rest of this document the csv files are converted back 
+to fixed-format. But that is not needed for SUGEOMCSV which can perform updates to SU seismic files 
+using either csv or fixed-format.
+
+----
 
 Yes, I could automate all examples if the idea here was to test my code, but it isn't.  
 The idea is to show novice users how to proceed. 
@@ -51,14 +67,7 @@ You can run the same kinds of tests for the SPS2 S and R files:
   sutoolcsv rfile=l2rall2.csv wfile=l2rall2.txt
   diff l2rall2.txt l2rall.txt
   
-----
 
-Once converted to csv files, it is relatively easy to produce plots/maps of the shot and receiver locations.
-As seen in the following files:
 
-  shots.png 
-  receiver.png
 
-One thing to note is that the shot lines and receiver lines are at right-angles. 
-This is quite typical for 3D, but not for 2D.
 
