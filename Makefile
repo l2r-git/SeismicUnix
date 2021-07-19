@@ -16,6 +16,7 @@ PROGS =			\
 	$B/suabshw	\
 	$B/suahw	\
 	$B/suaddhead	\
+	$B/subincsv	\
 	$B/sucdpbin	\
 	$B/suchart	\
 	$B/suchw	\

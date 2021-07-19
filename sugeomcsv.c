@@ -337,6 +337,10 @@ char *sdoc[] = {
 "       names=SPS1 This is just a standard way to specify the names= list  ", 
 "                  for SPS Revison 1 files (see examples in SUTOOLCSV).    ", 
 "                  The setid= option must also be X,S, or R.               ", 
+"       names=SPS2ALL  Same as SPS2. The SUTOOLCSV program has this option ", 
+"                      to output fields with no SU key (using numb names), ", 
+"                      but numb names are treated like null names herein.  ", 
+"       names=SPS1ALL  Same as SPS1.                                       ", 
 "                                                                          ", 
 "      setid= is used to accept text records based on their first field.   ", 
 "        setid=S     means accept text records if their first field is S   ", 
@@ -753,6 +757,9 @@ int main(int argc, char **argv) {
      else {
        if(ireplicate>0) err("**** Error: Input trace file must be specified when spikes=n.");
      }
+     if (unrepeat > -2147483645 && unrepeat != 1) {
+       err("**** Error: If specified, only unrepeat=1 allowed when creating traces.");
+     }
    }
    else { /* not creating traces */
      if(isatty(STDIN_FILENO)==1) err("**** Error: Input trace file must be specified when not create= ");
@@ -1053,7 +1060,9 @@ int main(int argc, char **argv) {
      }
    }
 
-   if(strcmp(names[0],"sps2") == 0) {
+/* Note sps2 and sps2all are same in this program since both null and numb are ignored. */
+
+   if(strcmp(names[0],"sps2") == 0 || strcmp(names[0],"sps2all") == 0) {
      if(strcmp(Rid,"X") == 0) {
        names[0] = ealloc1(7,1);
        strcpy(names[0],"c_su_id");
@@ -1219,10 +1228,11 @@ int main(int argc, char **argv) {
        num_names = 18;
 
      }
-   } /* end of  if(strcmp(names[0],"sps2") == 0) { */
+   } /* end of  if(strcmp(names[0],"sps2") == 0 || strcmp(names[0],"sps2all") == 0) { */
 
+/* Note sps1 and sps1all are same in this program since both null and numb are ignored. */
 
-   if(strcmp(names[0],"sps1") == 0) {
+   if(strcmp(names[0],"sps1") == 0 || strcmp(names[0],"sps1all") == 0) {
      if(strcmp(Rid,"X") == 0) {
        names[0] = ealloc1(7,1);
        strcpy(names[0],"c_su_id");
@@ -1388,7 +1398,7 @@ int main(int argc, char **argv) {
        num_names = 18;
 
      }
-   } /* end of  if(strcmp(names[0],"sps1") == 0) { */
+   } /* end of  if(strcmp(names[0],"sps1") == 0 || strcmp(names[0],"sps1all") == 0) { */
 
    ilead = calloc(num_names,sizeof(int));
    if(ilead == NULL) err("**** Unable to allocate memory.");
