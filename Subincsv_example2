@@ -1,0 +1,34 @@
+#!/bin/sh
+# Subincsp_example1 - for program SUBINCSV
+# Author: Andre Latour, Aug 2021
+#
+  echo "----------------------------------------------------------------------------"
+  echo "---  in this test, subincsv reads a 3d grid definition and updates cdp      "
+  echo "---  with the 3d cell number, and also igi,igc with 3d grid indexes.        "
+  echo "                                                                            "
+  echo "----------------------------------------------------------------------------"
+#
+subincsv <faketfn.su >fakeEFG.su rfile=kEFG.csv wfile=kEFGout.csv
+sugethw <fakeEFG.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeEGF.su rfile=kEGF.csv wfile=kEGFout.csv
+sugethw <fakeEGF.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeFEH.su rfile=kFEH.csv wfile=kFEHout.csv 
+sugethw <fakeFEH.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeFHE.su rfile=kFHE.csv wfile=kFHEout.csv
+sugethw <fakeFHE.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeGEH.su rfile=kGEH.csv wfile=kGEHout.csv
+sugethw <fakeGEH.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeGHE.su rfile=kGHE.csv wfile=kGHEout.csv
+sugethw <fakeGHE.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeHFG.su rfile=kHFG.csv wfile=kHFGout.csv
+sugethw <fakeHFG.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#
+subincsv <faketfn.su >fakeHGF.su rfile=kHGF.csv wfile=kHGFout.csv
+sugethw <fakeHGF.su key=sx,sy,gx,gy,cdp,igi,igc,offset
+#

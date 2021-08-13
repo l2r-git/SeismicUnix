@@ -1,0 +1,13 @@
+#!/bin/sh
+# Subincsp_example1 - for program SUBINCSV
+# Author: Andre Latour, Aug 2021
+#
+  echo "----------------------------------------------------------------------------"
+  echo "---  in this test, subincsv reads a 3d grid definition and updates cdp      "
+  echo "---  with the 3d cell number, and also igi,igc with 3d grid indexes.        "
+  echo "                                                                            "
+  echo "----------------------------------------------------------------------------"
+#
+  subincsv <faketfn.su >faketfnb.su bintype=30 grid_xa=338800 grid_ya=5540700 grid_xb=340299 grid_yb=5538101 grid_xc=339753 grid_yc=5541250 grid_wb=25 grid_wc=50 wfile=k1.csv 
+#
+  sugethw <faketfnb.su key=sx,sy,gx,gy,cdp,igi,igc,offset

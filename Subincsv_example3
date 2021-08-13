@@ -1,0 +1,32 @@
+#!/bin/sh
+# Subincsp_example1 - for program SUBINCSV
+# Author: Andre Latour, Aug 2021
+#
+  echo "----------------------------------------------------------------------------"
+  echo "---  in this test, subincsv reads a 3d grid definition and updates cdp      "
+  echo "---  with the 3d cell number, and also igi,igc with 3d grid indexes.        "
+  echo "                                                                            "
+  echo "----------------------------------------------------------------------------"
+#
+subincsv <fakexsrf.su >faketfb.su rfile=kEFG.csv wfile=kEFGout.csv
+#
+susort <faketfb.su >faketfbs.su cdp offset
+#
+sustack <faketfbs.su >faketfbss.su key=cdp verbose=1
+#
+suxwigb <faketfbssn.su key=cdp
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kEGF.csv wfile=kEGFout.csv
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kFEH.csv wfile=kFEHout.csv 
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kFHE.csv wfile=kFHEout.csv
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kGEH.csv wfile=kGEHout.csv
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kGHE.csv wfile=kGHEout.csv
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kHFG.csv wfile=kHFGout.csv
+#
+#subincsv <fakexsrfn.su >faketfnb.su rfile=kHGF.csv wfile=kHGFout.csv
+#
